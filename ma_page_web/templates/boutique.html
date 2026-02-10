@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="max-w-5xl mx-auto px-6 py-20">
+    <div class="mb-16 text-center md:text-left">
+        <h2 class="text-6xl font-black tracking-tighter uppercase mb-4">Stock Tech.</h2>
+        <p class="text-gray-400 uppercase text-[10px] tracking-widest">// Matériel informatique certifié</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-12 mb-32">
+        {% for p in produits %}
+        <div class="flex flex-col md:flex-row gap-10 border border-gray-100 p-8 bg-white hover:border-black transition-all">
+            <div class="w-full md:w-1/3 aspect-square bg-gray-50 flex items-center justify-center overflow-hidden">
+                <img src="/static/images/{{ p.img }}" alt="{{ p.nom }}" class="max-w-[80%] object-contain img-grayscale">
+            </div>
+            <div class="w-full md:w-2/3 flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] font-bold text-gray-500 tracking-widest uppercase">{{ p.cat }}</span>
+    
+                    <h3 class="text-3xl font-black mt-2 mb-4 tracking-tighter text-black">{{ p.nom }}</h3>
+    
+                    <p class="text-gray-700 font-light leading-relaxed mb-6">
+                    Produit testé et configuré par KABITA. Idéal pour les étudiants et professionnels. 
+                    Garantie 6 mois incluse.
+                    </p>
+                </div>
+            <div class="flex items-center justify-between border-t pt-6">
+                    <span class="text-3xl font-black italic">{{ p.prix }} <small class="text-xs uppercase">FCFA</small></span>
+                    <a href="https://wa.me/22657132603?text=Je+souhaite+commander+le+{{ p.nom|urlencode }}" 
+                       class="bg-black text-white px-8 py-4 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-800 transition-all">
+                        Acheter maintenant →
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

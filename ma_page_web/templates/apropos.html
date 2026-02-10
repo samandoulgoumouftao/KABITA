@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="max-w-5xl mx-auto px-6 py-24">
+    <div class="mb-24">
+        <h2 class="text-6xl md:text-8xl font-black tracking-tighter uppercase mb-8">Expertise <br>& Vision.</h2>
+        <div class="flex items-center gap-4 text-gray-400">
+            <span class="w-12 h-[1px] bg-gray-300"></span>
+            <p class="text-[10px] uppercase tracking-[0.3em] font-bold">Propulser votre digital à Ouagadougou</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 items-start mb-32">
+        <div class="md:col-span-1">
+            <div class="relative group">
+                <div class="absolute -inset-4 border border-black transition-transform duration-500 group-hover:scale-105"></div>
+                <img src="{% static 'images/photo.jpg' %}" alt="Mouftao - KABITA" 
+                     class="relative w-full grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl">
+                
+                <div class="mt-8">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-black">Fondateur de KABITA</p>
+                    <p class="text-gray-400 font-light text-sm italic">Mouftao Samandoulgou</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:col-span-2 space-y-10">
+            <h3 class="text-2xl font-bold border-l-4 border-black pl-6 uppercase tracking-tighter">Qui est derrière KABITA ?</h3>
+            <div class="space-y-6 text-gray-600 font-light leading-relaxed text-lg text-justify">
+                <p>
+                    Passionné par l'innovation technologique, j'ai fondé <span class="font-bold text-black">KABITA</span> pour répondre aux défis numériques des entreprises et particuliers au Burkina Faso. 
+                </p>
+                <p>
+                    Mon approche repose sur un pilier simple : <strong>La Rigueur</strong>. Qu'il s'agisse de développer une application web complexe sous Django ou de restaurer un ordinateur professionnel, chaque détail compte pour garantir la performance et la durabilité.
+                </p>
+                <p>
+                    Aujourd'hui, j'accompagne mes clients de la conception logicielle jusqu'à la fourniture du matériel le plus adapté à leurs besoins réels.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-black text-white p-12 mb-32">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <span class="text-gray-500 text-[10px] font-bold tracking-[0.4em] uppercase block mb-4">01 / Dév. Web</span>
+                <p class="text-lg font-bold tracking-tight">Applications sur mesure et solutions Backend robustes avec Python/Django.</p>
+            </div>
+            <div>
+                <span class="text-gray-500 text-[10px] font-bold tracking-[0.4em] uppercase block mb-4">02 / Hardware</span>
+                <p class="text-lg font-bold tracking-tight">Diagnostic avancé, micro-soudure et optimisation de parcs informatiques.</p>
+            </div>
+            <div>
+                <span class="text-gray-500 text-[10px] font-bold tracking-[0.4em] uppercase block mb-4">03 / Consulting</span>
+                <p class="text-lg font-bold tracking-tight">Vente de matériel certifié et conseils stratégiques pour votre transformation.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="border-t border-gray-100 pt-20">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center md:text-left">
+            <div class="space-y-2">
+                <span class="text-4xl font-black block tracking-tighter">100%</span>
+                <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Engagement Qualité</p>
+            </div>
+            <div class="space-y-2">
+                <span class="text-4xl font-black block tracking-tighter">24/7</span>
+                <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Support Technique</p>
+            </div>
+            <div class="space-y-2">
+                <span class="text-4xl font-black block tracking-tighter">Expert</span>
+                <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Conseil Matériel</p>
+            </div>
+            <div class="space-y-2">
+                <span class="text-4xl font-black block tracking-tighter">Burkina</span>
+                <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Ancrage Local</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-32 bg-gray-50 p-12 text-center border border-gray-100">
+        <h3 class="text-3xl font-black tracking-tighter uppercase mb-6">Prêt à collaborer ?</h3>
+        <p class="text-gray-500 mb-10 font-light">Confiez vos projets tech à un expert passionné.</p>
+        <a href="{% url 'home' %}#contact" class="inline-block bg-black text-white px-12 py-5 text-[10px] font-black uppercase tracking-[0.3em] hover:bg-gray-800 transition-all">
+            Démarrer une discussion →
+        </a>
+    </div>
+</main>
+
+<style>
+    /* On assure un fond blanc propre pour cette page */
+    body { background-color: #ffffff; }
+</style>
+{% endblock %}
