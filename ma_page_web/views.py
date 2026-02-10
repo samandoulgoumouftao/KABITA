@@ -1,12 +1,14 @@
+import resend
 from django.shortcuts import render, redirect, get_object_or_404
-from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
-from .models import Profil, Article
+from .models import Profil, Article, MessageContact
+
+# REMPLACE CECI PAR TA CLÉ COPIÉE (Garde les guillemets)
+resend.api_key = "re_C8aasvre_3tfg5qNPAHhqJ4Q46wPj4MDF" 
 
 def home(request):
     mon_profil = Profil.objects.first()
-    # On affiche seulement les 2 derniers articles sur l'accueil
     mes_articles = Article.objects.all().order_by('-date_publication')[:2]
     
     if request.method == "POST":
@@ -15,23 +17,33 @@ def home(request):
         sujet_client = request.POST.get('sujet')
         message_client = request.POST.get('message')
         
-        sujet_final = f"SITE WEB KABITA : {sujet_client}" 
-        corps_final = f"De: {nom} ({email_client})\n\nMessage:\n{message_client}"
-        
         try:
-            send_mail(sujet_final, corps_final, settings.EMAIL_HOST_USER, ['mouftaoa@gmail.com'])
-            messages.success(request, "VOTRE MESSAGE A ÉTÉ ENVOYÉ AVEC SUCCÈS")
-        except:
-            messages.error(request, "ERREUR LORS DE L'ENVOI")
+            # 1. On enregistre en base de données (sécurité)
+            MessageContact.objects.create(
+                nom=nom, 
+                email=email_client, 
+                sujet=sujet_client, 
+                message=message_client
+            )
+            
+            # 2. On envoie l'email via Resend (vitesse)
+            resend.Emails.send({
+                "from": "onboarding@resend.dev",
+                "to": "mouftaoa@gmail.com",
+                "subject": f"KABITA (Accueil) : {sujet_client}",
+                "html": f"<p><strong>Nom:</strong> {nom}</p><p><strong>Email:</strong> {email_client}</p><p><strong>Message:</strong> {message_client}</p>"
+            })
+            
+            messages.success(request, "VOTRE MESSAGE A ÉTÉ REÇU ET ENVOYÉ AVEC SUCCÈS !")
+        except Exception as e:
+            print(f"Erreur: {e}")
+            messages.error(request, "VOTRE MESSAGE A ÉTÉ ENREGISTRÉ MAIS L'ENVOI EMAIL A ÉCHOUÉ.")
+            
         return redirect('home')
 
-    return render(request, 'home.html', {
-        'profil': mon_profil, 
-        'articles': mes_articles
-    })
+    return render(request, 'home.html', {'profil': mon_profil, 'articles': mes_articles})
 
 def boutique(request):
-    # TA LISTE DE PRODUITS (Tu peux changer les noms, prix et images ici directement)
     produits = [
         {'nom': 'Redmi 15C 256GB', 'cat': 'TELEPHONE', 'prix': '75 000', 'img': 'redmi_15c_256.jpg'},
         {'nom': 'Infinix Hot 60i 128GB', 'cat': 'TELEPHONE', 'prix': '80 000', 'img': 'infinix_hote_60i.jpg'},
@@ -41,28 +53,31 @@ def boutique(request):
         {'nom': 'Dell Core i3', 'cat': 'ORDINATEUR', 'prix': '100 000', 'img': 'dell_corei3.jpg'},
         {'nom': 'Asus Core i5', 'cat': 'ORDINATEUR', 'prix': '190 000', 'img': 'asus_corei5.jpg'},
     ]
-    
     return render(request, 'boutique.html', {'produits': produits})
+
 def contact(request):
     if request.method == "POST":
         nom = request.POST.get('nom')
         email_client = request.POST.get('email')
         sujet_client = request.POST.get('sujet')
         message_client = request.POST.get('message')
-        
-        sujet_final = f"SITE WEB KABITA : {sujet_client}" 
-        corps_final = f"De: {nom} ({email_client})\n\nMessage:\n{message_client}"
          
         try:
-            send_mail(sujet_final, corps_final, settings.EMAIL_HOST_USER, ['mouftaoa@gmail.com'])
+            resend.Emails.send({
+                "from": "onboarding@resend.dev",
+                "to": "mouftaoa@gmail.com",
+                "subject": f"SITE WEB KABITA (Contact) : {sujet_client}",
+                "html": f"<h3>Nouveau message</h3><p><strong>De:</strong> {nom} ({email_client})</p><p><strong>Message:</strong> {message_client}</p>"
+            })
             messages.success(request, "VOTRE MESSAGE A ÉTÉ ENVOYÉ AVEC SUCCÈS")
-        except:
+        except Exception as e:
+            print(f"DEBUG RESEND ERROR: {e}")
             messages.error(request, "ERREUR LORS DE L'ENVOI")
+        
         return redirect('contact')
         
     return render(request, 'contact.html')
+
 def apropos(request):
-    # On peut aussi passer le profil ici si tu veux utiliser {{ profil.nom }}
-    from .models import Profil
     mon_profil = Profil.objects.first()
     return render(request, 'apropos.html', {'profil': mon_profil})

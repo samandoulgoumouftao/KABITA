@@ -112,12 +112,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Configuration de l'envoi de mail réelle
 # settings.py
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # Remplace EMAIL_HOST = 'smtp.gmail.com' par :
-EMAIL_HOST = '74.125.133.108'  # C'est l'adresse IP directe du serveur SMTP de Google
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
+# Configuration EMAIL - TEST PORT 465 (SSL)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True  # On active le SSL direct
+EMAIL_TIMEOUT = 10  # On réduit le temps d'attente à 10s pour éviter le crash worker
 # REMPLACE ICI :
 EMAIL_HOST_USER = 'mouftaoa@gmail.com'  # Ton adresse Gmail
 EMAIL_HOST_PASSWORD = 'cobopcpyhvgigcns'  # Le code jaune de Google sans espaces
