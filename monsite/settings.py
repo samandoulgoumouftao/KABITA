@@ -111,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Configuration de l'envoi de mail réelle
+# settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -124,10 +125,8 @@ DEFAULT_FROM_EMAIL = 'Portfolio <mouftaoa@gmail.com>'
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+LANGUAGE_CODE = 'fr-fr'
+TIME_ZONE = 'Africa/Ouagadougou'
 USE_I18N = True
 
 USE_TZ = True

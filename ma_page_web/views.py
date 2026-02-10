@@ -43,7 +43,6 @@ def boutique(request):
     ]
     
     return render(request, 'boutique.html', {'produits': produits})
-    return render(request, 'article_detail.html', {'article': article})
 def contact(request):
     if request.method == "POST":
         nom = request.POST.get('nom')
