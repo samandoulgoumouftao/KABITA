@@ -5,7 +5,7 @@ from django.conf import settings
 from .models import Profil, Article, MessageContact
 
 # REMPLACE CECI PAR TA CLÉ COPIÉE (Garde les guillemets)
-resend.api_key = "re_votre_cle_ici" 
+resend.api_key = "re_K3DBWneR_F2SnBtQfRrjgwzwmP4ttZetE" 
 
 def home(request):
     mon_profil = Profil.objects.first()
