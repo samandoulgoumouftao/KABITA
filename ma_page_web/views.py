@@ -33,13 +33,13 @@ def home(request):
 def boutique(request):
     # TA LISTE DE PRODUITS (Tu peux changer les noms, prix et images ici directement)
     produits = [
-        {'nom': 'Redmi 15C 256GB', 'cat': 'TELEPHONE', 'prix': '125 000', 'img': 'redmi_15c_256.jpg'},
-        {'nom': 'Infinix Hot 60i 128GB', 'cat': 'TELEPHONE', 'prix': '105 000', 'img': 'infinix_hote_60i.jpg'},
-        {'nom': 'Redmi 14C', 'cat': 'TELEPHONE', 'prix': '95 000', 'img': 'redmi_14c.jpg'},
-        {'nom': 'HP Core i7', 'cat': 'ORDINATEUR', 'prix': '250 000', 'img': 'hp_corei7.jpg'},
-        {'nom': 'Lenovo Core i5', 'cat': 'ORDINATEUR', 'prix': '275 000', 'img': 'Lenovo_corei5.jpg'},
-        {'nom': 'Dell Core i3', 'cat': 'ORDINATEUR', 'prix': '185 000', 'img': 'hp_corei5.jpg'},
-        {'nom': 'Asus Core i5', 'cat': 'ORDINATEUR', 'prix': '290 000', 'img': 'hp_corei3.jpg'},
+        {'nom': 'Redmi 15C 256GB', 'cat': 'TELEPHONE', 'prix': '75 000', 'img': 'redmi_15c_256.jpg'},
+        {'nom': 'Infinix Hot 60i 128GB', 'cat': 'TELEPHONE', 'prix': '80 000', 'img': 'infinix_hote_60i.jpg'},
+        {'nom': 'Redmi 14C', 'cat': 'TELEPHONE', 'prix': '70 000', 'img': 'redmi_14c.jpg'},
+        {'nom': 'HP Core i7', 'cat': 'ORDINATEUR', 'prix': '160 000', 'img': 'hp_corei3.jpg'},
+        {'nom': 'Lenovo Core i3', 'cat': 'ORDINATEUR', 'prix': '100 000', 'img': 'lenovo_corei3.jpg'},
+        {'nom': 'Dell Core i3', 'cat': 'ORDINATEUR', 'prix': '100 000', 'img': 'dell_corei3.jpg'},
+        {'nom': 'Asus Core i5', 'cat': 'ORDINATEUR', 'prix': '190 000', 'img': 'asus_corei5.jpg'},
     ]
     
     return render(request, 'boutique.html', {'produits': produits})
